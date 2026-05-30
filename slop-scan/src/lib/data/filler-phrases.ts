@@ -1,0 +1,272 @@
+// filler-phrases.ts
+// the hall of shame: 200+ phrases that scream "AI wrote this"
+// curated by reading way too many ChatGPT outputs
+// AI Filler Phrases Database — EXPANDED
+// ============================================================
+
+export const FILLER_PHRASES = [
+  // Throat-clearing openers
+  "it's important to note",
+  "it is important to note",
+  "it's worth noting",
+  "it is worth noting",
+  "it's worth mentioning",
+  "it is worth mentioning",
+  "it should be noted that",
+  "it goes without saying",
+  "needless to say",
+  "it bears mentioning",
+  "it cannot be overstated",
+  "one cannot overstate",
+
+  // Landscape / world setting
+  "in today's world",
+  "in today's fast-paced",
+  "in today's rapidly evolving",
+  "in today's digital age",
+  "in today's digital landscape",
+  "in today's competitive",
+  "in today's interconnected",
+  "in the ever-evolving",
+  "in the ever-changing landscape",
+  "in the ever-changing world",
+  "in an increasingly connected",
+  "in an increasingly digital",
+  "in an era of",
+  "in this day and age",
+  "as we navigate the complexities",
+  "as we continue to navigate",
+  "in the realm of",
+  "in the world of",
+  "when it comes to",
+  "the landscape of",
+  "the world of",
+
+  // Guide / article self-reference
+  "this comprehensive guide",
+  "this in-depth guide",
+  "this article explores",
+  "this article will explore",
+  "this article examines",
+  "this article delves",
+  "in this article",
+  "in this blog post",
+  "in this guide",
+  "in this section",
+  "let's dive in",
+  "let's dive deeper",
+  "let's explore",
+  "let's delve into",
+  "let's take a closer look",
+  "let's break it down",
+  "let's examine",
+  "without further ado",
+
+  // Audience assumptions
+  "whether you're a seasoned",
+  "whether you're a beginner",
+  "whether you're new to",
+  "whether you are looking",
+  "whether you're looking",
+  "from seasoned professionals to",
+  "look no further",
+  "you've come to the right place",
+  "you may be wondering",
+  "you might be wondering",
+  "if you're looking for",
+  "if you are looking for",
+
+  // Conclusions
+  "in conclusion",
+  "to sum up",
+  "to summarize",
+  "all in all",
+  "at the end of the day",
+  "moving forward",
+  "going forward",
+  "the bottom line is",
+  "when all is said and done",
+  "in summary",
+  "to wrap things up",
+  "as we have seen",
+  "as we've seen",
+  "as discussed above",
+  "as mentioned earlier",
+  "as previously mentioned",
+
+  // Hedging / qualifying
+  "it can be argued that",
+  "to some extent",
+  "in many ways",
+  "in some respects",
+  "it is generally accepted",
+  "broadly speaking",
+  "by and large",
+  "to a certain extent",
+  "to a large extent",
+  "it is widely recognized",
+  "it is well known",
+  "it is no secret",
+
+  // Transition fillers
+  "having said that",
+  "with that being said",
+  "that being said",
+  "be that as it may",
+  "on the flip side",
+  "by the same token",
+  "with this in mind",
+  "bearing this in mind",
+  "taking this into account",
+  "with that in mind",
+
+  // Empty emphasis
+  "play a crucial role",
+  "plays a vital role",
+  "plays a pivotal role",
+  "plays an important role",
+  "serves as a testament",
+  "stands as a beacon",
+  "paves the way for",
+  "sheds light on",
+  "brings to the table",
+  "at its core",
+  "is no exception",
+  "is a prime example",
+  "goes a long way",
+  "makes all the difference",
+  "cannot be understated",
+
+  // AI structural patterns
+  "not only but also",
+  "on one hand",
+  "on the other hand",
+  "first and foremost",
+  "last but not least",
+  "each and every",
+  "above and beyond",
+  "time and time again",
+  "more often than not",
+  "for all intents and purposes",
+  "the fact of the matter",
+  "the importance of",
+  "the significance of",
+  "the impact of",
+  "the role of",
+  "the power of",
+  "the beauty of",
+  "the key to",
+  "the secret to",
+
+  // Engagement/value claims
+  "actionable insights",
+  "valuable insights",
+  "key takeaways",
+  "best practices",
+  "proven strategies",
+  "practical tips",
+  "expert tips",
+  "insider tips",
+  "pro tips",
+
+  // Hiring / cover letter / resume patterns
+  "i am writing to express",
+  "i am writing to apply",
+  "proven track record",
+  "valuable addition to your team",
+  "valuable addition to the team",
+  "valuable asset to your team",
+  "valuable asset to the team",
+  "esteemed organization",
+  "esteemed company",
+  "esteemed institution",
+  "delivering high-quality",
+  "delivering high quality",
+  "high-quality solutions",
+  "passionate about",
+  "strong passion for",
+  "detail-oriented",
+  "results-driven",
+  "self-motivated",
+  "highly motivated",
+  "thrives in a collaborative",
+  "thrives in fast-paced",
+  "dynamic environment",
+  "fast-paced environment",
+  "continuous learning",
+  "lifelong learning",
+  "committed to excellence",
+  "drive innovation",
+  "cross-functional teams",
+  "exceeded expectations",
+  "exceeded all expectations",
+  "express my interest",
+  "express my strong interest",
+  "demonstrated ability",
+  "demonstrated expertise",
+  "deep understanding",
+
+  // Social media / wellness patterns
+  "your future self will thank you",
+  "don't hesitate to reach out",
+  "don't neglect",
+  "remember, self-care",
+  "a gateway to",
+  "wellness journey",
+  "most important investments",
+  "overall well-being",
+
+  // General AI padding
+  "I am confident that",
+  "I am confident I",
+  "I firmly believe",
+  "I strongly believe",
+  "of paramount importance",
+  "cannot be overstated",
+  "it is imperative",
+  "a testament to",
+  "serves as a catalyst",
+  "continues to evolve",
+  "ever-growing",
+  "stay ahead of the curve",
+  "staying ahead of",
+  "take your skills to the next level",
+];
+
+/** Hedging patterns (regex) */
+export const HEDGING_PATTERNS = [
+  /\b(arguably|potentially|seemingly|presumably|ostensibly)\b/gi,
+  /\b(it can be argued|one might argue|some may say|some would say)\b/gi,
+  /\b(to a certain extent|in many ways|in some respects)\b/gi,
+  /\b(not only\b.+?\bbut also)\b/gi,
+  /\b(may or may not|could potentially|might possibly)\b/gi,
+  /\b(it is (widely|generally|commonly) (believed|accepted|recognized|known))\b/gi,
+  /\b(there is no denying|there is no doubt)\b/gi,
+];
+
+/** AI structural patterns (regex) for sentence-level detection */
+export const AI_STRUCTURE_PATTERNS = [
+  // "Not only X, but also Y" pattern
+  /not only .{5,60} but also/i,
+  // "From X to Y" paired pattern
+  /from .{3,30} to .{3,30}/i,
+  // Triple listing "X, Y, and Z" with similar-length items
+  /\b\w+, \w+, and \w+\b/i,
+  // "Whether...or" pattern
+  /whether .{5,40} or .{5,40}/i,
+  // "By [gerund]" pattern
+  /\bby (leveraging|utilizing|implementing|incorporating|harnessing|embracing|adopting|employing)\b/i,
+  // Colon-list pattern "X: Y, Z, and W"
+  /: .{3,20}, .{3,20}, and .{3,20}/i,
+  // "Ensure/ensure that" pattern (AI loves this)
+  /\b(ensures?|ensuring) (that |a |the |optimal|seamless|robust|reliable|proper|effective)/i,
+  // "This (verb)s" pattern (AI self-referential)
+  /\bthis (allows|enables|ensures|provides|creates|offers|gives|helps|makes|facilitates|demonstrates|highlights|showcases|illustrates|underscores)\b/i,
+  // Parenthetical examples pattern
+  /\(e\.g\.,? .{5,50}\)/i,
+  /\(such as .{5,50}\)/i,
+  /\(i\.e\.,? .{5,50}\)/i,
+];
+
+/** Create a lowercase Set for fast matching */
+export const FILLER_SET = new Set(FILLER_PHRASES.map(p => p.toLowerCase()));

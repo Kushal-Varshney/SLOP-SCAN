@@ -1,0 +1,218 @@
+[
+  {
+    "text": "This PR updates the user authentication flow to use JWT tokens instead of session cookies. The main changes are in auth.ts where we replace the session middleware with a JWT verification function. Breaking change: all existing sessions will be invalidated on deploy.",
+    "label": "human",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "This pull request introduces a comprehensive refactoring of the authentication module, enhancing the overall security posture of the application. The changes leverage modern JWT-based authentication paradigms to streamline the user verification process. Key improvements include robust token validation, enhanced error handling mechanisms, and improved code maintainability through modular architecture patterns.",
+    "label": "ai",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "Fix: race condition in WebSocket reconnect. When the server drops connection during a batch upload, the retry logic was firing before the previous connection fully closed. Added a 100ms debounce and a connection state check. Repros with the load test in test/ws-stress.ts.",
+    "label": "human",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "This commit implements a series of critical improvements to the WebSocket connection management system. The changes address various edge cases in the reconnection logic, ensuring robust and reliable real-time communication. The implementation follows industry best practices for handling network instability and provides comprehensive error recovery mechanisms.",
+    "label": "ai",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "Added dark mode. Uses prefers-color-scheme media query + manual toggle stored in localStorage. CSS variables swap in :root[data-theme='dark']. Toggle button in the header. Tested in Chrome, Firefox, Safari.",
+    "label": "human",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "This pull request introduces a comprehensive dark mode implementation that enhances the user experience by providing an alternative visual theme. The solution leverages CSS custom properties to facilitate seamless theme transitions, utilizing the prefers-color-scheme media query for automatic detection while also empowering users with manual control through an intuitive toggle mechanism. The implementation ensures consistency across all components and has been thoroughly tested across multiple browsers.",
+    "label": "ai",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "To set up the dev environment, clone the repo and run `npm install`. You need Node 18+ and Postgres 15. Copy `.env.example` to `.env` and fill in your database URL. Run `npm run db:migrate` to set up tables. Start with `npm run dev`. The API runs on port 3000, frontend on 3001.",
+    "label": "human",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "Setting up the development environment is a crucial first step in your journey with our platform. In today's rapidly evolving software landscape, having a properly configured development environment is essential for ensuring a smooth and productive workflow. This comprehensive guide will walk you through the necessary steps to get your environment up and running, empowering you to leverage the full potential of our cutting-edge technology stack.",
+    "label": "ai",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "The caching layer sits between the API gateway and the database. Reads check Redis first (TTL 5min for user data, 1hr for config). Cache invalidation happens on writes via pub/sub — the writer publishes to a 'cache-bust' channel with the affected key prefix. Known issue: bulk imports can cause a thundering herd; we rate-limit cache rebuilds to 10/sec.",
+    "label": "human",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "Understanding the Caching Architecture\n\nThe caching layer plays a pivotal role in our application's architecture, serving as a cornerstone for optimal performance. It's important to note that caching is a multifaceted concept that encompasses various strategies and considerations. Our implementation leverages industry-leading technologies to ensure robust and scalable caching capabilities. The following sections delve into the intricacies of our caching strategy, exploring the various components that work in symphony to deliver a seamless experience.",
+    "label": "ai",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "I'm applying for the Senior Frontend Engineer role at Stripe. I've spent the last 3 years building the checkout SDK at Square, where I reduced payment form load time from 2.1s to 0.4s by rewriting the iframe communication layer. Before that I was at a 12-person startup where I built their entire React component library from scratch. I'm specifically interested in Stripe's work on optimistic UI updates in the Dashboard — I wrote a blog post about that pattern last year.",
+    "label": "human",
+    "source": "cover-letter",
+    "track": "hiring"
+  },
+  {
+    "text": "I am writing to express my strong interest in the Software Engineer position at your esteemed organization. With my comprehensive background in software development and a proven track record of delivering high-quality solutions, I am confident that I would be a valuable addition to your team. Throughout my career, I have consistently demonstrated my ability to leverage cutting-edge technologies to drive innovation and deliver transformative results. I am a highly motivated and detail-oriented professional who thrives in collaborative environments.",
+    "label": "ai",
+    "source": "cover-letter",
+    "track": "hiring"
+  },
+  {
+    "text": "hey team — deploy's blocked. the staging cert expired and nobody renewed it. I'm regenerating it now, should be back in 20 min. don't merge anything to main until I confirm.",
+    "label": "human",
+    "source": "slack-message",
+    "track": "comms"
+  },
+  {
+    "text": "Dear Team,\n\nI wanted to take a moment to bring to your attention an important matter regarding our deployment pipeline. It has come to my notice that we are currently experiencing a temporary disruption in our staging environment, which is attributable to an SSL certificate expiration. I am actively working to resolve this situation and will ensure that the necessary steps are taken to restore full functionality. In the meantime, I would kindly request that all team members refrain from merging any changes to the main branch until further notice. I appreciate your understanding and cooperation in this matter.",
+    "label": "ai",
+    "source": "slack-message",
+    "track": "comms"
+  },
+  {
+    "text": "The meeting ran long because we couldn't agree on the API versioning strategy. Sarah wants URL-based (/v2/users), I pushed for header-based (Accept: application/vnd.api+json;version=2). We're testing both approaches this sprint and deciding at next week's retro. Action items: Sarah owns URL prototype, I own header prototype. Due Friday.",
+    "label": "human",
+    "source": "meeting-notes",
+    "track": "comms"
+  },
+  {
+    "text": "Meeting Summary\n\nThe team convened to discuss various aspects of the project's technical architecture. Several important topics were covered, including API design considerations and future development strategies. The meeting was productive, with team members sharing valuable insights and perspectives. Key action items were identified and assigned to relevant stakeholders. The team demonstrated a strong commitment to delivering high-quality results and maintaining effective collaboration moving forward.",
+    "label": "ai",
+    "source": "meeting-notes",
+    "track": "comms"
+  },
+  {
+    "text": "I switched from Chrome to Firefox last month because Chrome was eating 4GB of RAM with 20 tabs. Firefox uses about 1.5GB with the same tabs. The only extension I miss is the React DevTools — the Firefox version is slightly behind. Tab management is better in Firefox with the built-in tab groups. No complaints after a month of daily use.",
+    "label": "human",
+    "source": "blog-post",
+    "track": "seo"
+  },
+  {
+    "text": "In today's digital landscape, choosing the right web browser is more important than ever. Whether you're a seasoned developer or a casual internet user, the browser you choose can significantly impact your productivity and online experience. In this comprehensive guide, we'll explore the top web browsers of 2026, delving into their features, performance metrics, and user experience to help you make an informed decision. Let's dive in and discover which browser is the perfect fit for your needs.",
+    "label": "ai",
+    "source": "blog-post",
+    "track": "seo"
+  },
+  {
+    "text": "We tested GPT-4o against Claude 3.5 on 500 customer support tickets. GPT-4o resolved 73% correctly on first attempt; Claude hit 71%. But Claude had fewer hallucinated policy citations (2% vs 8%). For our use case (insurance claims), Claude's lower hallucination rate matters more. We're going with Claude. Full results in the spreadsheet linked below.",
+    "label": "human",
+    "source": "blog-post",
+    "track": "seo"
+  },
+  {
+    "text": "Artificial Intelligence: Revolutionizing the Future of Technology\n\nIn the ever-evolving landscape of technology, artificial intelligence stands as a beacon of innovation and progress. As we navigate the complexities of the digital age, AI continues to reshape our world in profound and transformative ways. From streamlining business operations to enhancing personal productivity, the applications of AI are vast and multifaceted. In this article, we'll explore the groundbreaking advancements in AI technology and their far-reaching implications for society.",
+    "label": "ai",
+    "source": "blog-post",
+    "track": "seo"
+  },
+  {
+    "text": "Our study analyzed 847 emergency department visits at three urban hospitals between March and August 2025. We found that patients presenting with chest pain waited an average of 47 minutes (SD=23) for initial triage, compared to 31 minutes (SD=18) at the same facilities in 2023 (p<0.001). The increase correlates with a 22% rise in ED volume without corresponding staffing increases (Table 2).",
+    "label": "human",
+    "source": "academic-paper",
+    "track": "academic"
+  },
+  {
+    "text": "This study examines the multifaceted landscape of emergency department operations in contemporary healthcare settings. The analysis employs a comprehensive methodology to investigate various factors that contribute to patient outcomes. Our findings suggest that there are significant opportunities for improvement in emergency care delivery. The results underscore the importance of implementing evidence-based strategies to enhance operational efficiency and patient satisfaction in emergency department settings.",
+    "label": "ai",
+    "source": "academic-paper",
+    "track": "academic"
+  },
+  {
+    "text": "Bought this for my 10-year-old's birthday. The battery life is decent — about 6 hours of continuous use, not the 8 they advertise. Screen is bright enough for outdoor use. My main complaint is the charging cable is proprietary and costs $25 to replace. The case scratches easily too. Overall fine for the price but don't expect premium build quality.",
+    "label": "human",
+    "source": "product-review",
+    "track": "reviews"
+  },
+  {
+    "text": "This product exceeded all my expectations! From the moment I unboxed it, I was impressed by the exceptional quality and attention to detail. The performance is outstanding, delivering seamless functionality that enhances my daily routine. I would highly recommend this product to anyone looking for a reliable and high-quality solution. Five stars well deserved!",
+    "label": "ai",
+    "source": "product-review",
+    "track": "reviews"
+  },
+  {
+    "text": "Terrible. Ordered size M based on the chart, received something that fits like XL. Contacted support three times, got the same copy-paste response about 'reviewing my case.' It's been two weeks and no refund. The fabric also smells like chemicals out of the package. Avoid.",
+    "label": "human",
+    "source": "product-review",
+    "track": "reviews"
+  },
+  {
+    "text": "I recently purchased this product and I must say it has been an absolutely wonderful addition to my collection. The craftsmanship is superb and the materials used are of the highest quality. It arrived promptly and was packaged with great care. I have been using it daily and it continues to perform flawlessly. This is truly a game-changer in its category and I cannot recommend it enough to others who are considering making this purchase.",
+    "label": "ai",
+    "source": "product-review",
+    "track": "reviews"
+  },
+  {
+    "text": "The school board voted 5-2 last night to close Riverside Elementary next year due to declining enrollment (down 40% since 2020). Parents packed the meeting — about 200 people. Board member Chen voted against, saying the district's enrollment projections don't account for the new housing development on Oak Street. Superintendent Williams says affected students will transfer to Lincoln Elementary, 1.5 miles away.",
+    "label": "human",
+    "source": "news-article",
+    "track": "social"
+  },
+  {
+    "text": "In a groundbreaking development that has sent shockwaves through the community, local authorities have announced sweeping changes that will fundamentally reshape the educational landscape. This transformative decision represents a paradigm shift in how the community approaches education and resource allocation. Stakeholders from various sectors have voiced their perspectives, highlighting the multifaceted nature of this pivotal issue. The implications of this decision are far-reaching and will undoubtedly have a lasting impact on the community for years to come.",
+    "label": "ai",
+    "source": "news-article",
+    "track": "social"
+  },
+  {
+    "text": "just got back from the dentist. apparently I've been brushing too hard for years and wore down my enamel. $800 for two crowns next month. adulting is fun",
+    "label": "human",
+    "source": "social-post",
+    "track": "social"
+  },
+  {
+    "text": "Taking care of your dental health is one of the most important investments you can make in your overall well-being! 🦷✨ Remember, a healthy smile is a gateway to a healthier, happier life. Don't neglect your regular dental check-ups — your future self will thank you! #DentalHealth #SelfCare #WellnessJourney #HealthyLiving",
+    "label": "ai",
+    "source": "social-post",
+    "track": "social"
+  },
+  {
+    "text": "We ran into a weird bug where the date picker shows January 1970 when the user's timezone is UTC+13 (Tonga). The Date constructor interprets the ISO string differently. Fixed by explicitly passing timezone offset to dayjs. Added a test case for all UTC+12 through UTC+14 offsets.",
+    "label": "human",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "This pull request addresses a critical issue in the date handling functionality of our application. The changes implement a robust solution for timezone-related edge cases, ensuring accurate date representation across all global regions. The fix leverages the dayjs library's comprehensive timezone support to provide reliable date parsing and formatting capabilities. Extensive test coverage has been added to validate the fix across various scenarios.",
+    "label": "ai",
+    "source": "github-pr",
+    "track": "code-review"
+  },
+  {
+    "text": "API rate limiting:\n\n- Free tier: 100 requests/hour\n- Pro: 1000/hour\n- Enterprise: custom\n\nRate limits are per API key, not per IP. When you hit the limit you get a 429 with a Retry-After header in seconds. The limit resets at the top of each hour UTC. Burst allowance: you can do 10x your per-second rate for up to 5 seconds.",
+    "label": "human",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "Understanding API Rate Limiting: A Comprehensive Overview\n\nAPI rate limiting is an essential aspect of modern web development that plays a crucial role in maintaining the stability and reliability of your applications. In today's interconnected digital ecosystem, understanding how rate limiting works is paramount for developers who want to build robust and scalable solutions. This guide provides a thorough exploration of rate limiting concepts, strategies, and best practices that will empower you to effectively manage API consumption in your projects.",
+    "label": "ai",
+    "source": "documentation",
+    "track": "docs"
+  },
+  {
+    "text": "I led the migration of our monolithic Rails app to microservices at Shopify from 2022-2024. We broke out the inventory service first because it was the bottleneck — 70% of our DB queries came from inventory checks. Post-migration, p99 latency for inventory queries dropped from 340ms to 45ms. The team was 4 engineers. I specifically designed the event sourcing pattern we used for inventory state sync.",
+    "label": "human",
+    "source": "resume",
+    "track": "hiring"
+  },
+  {
+    "text": "Experienced software engineer with a strong passion for building innovative solutions that drive business value. Proven ability to work effectively in cross-functional teams and deliver high-quality software in fast-paced environments. Skilled in multiple programming languages and frameworks with a deep understanding of software development best practices. Committed to continuous learning and staying at the forefront of technological advancements.",
+    "label": "ai",
+    "source": "resume",
+    "track": "hiring"
+  }
+]
