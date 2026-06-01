@@ -9,7 +9,7 @@ import ExportButton from '@/components/ExportButton';
 import FileUpload from '@/components/FileUpload';
 import { Suspense } from 'react';
 
-type InputMode = 'paste' | 'upload';
+type InputMode = 'paste' | 'upload' | 'url';
 
 function getScoreQuip(score: number): string {
   if (score < 20) return 'No significant AI patterns detected.';
@@ -28,6 +28,10 @@ function ScannerContent() {
   const [inputMode, setInputMode] = useState<InputMode>('paste');
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [urlInput, setUrlInput] = useState('');
+  const [urlFetching, setUrlFetching] = useState(false);
+  const [urlError, setUrlError] = useState<string | null>(null);
+  const [scannedUrl, setScannedUrl] = useState<string | null>(null);
 
   const handleScan = async () => {
     if (!text.trim()) return;
@@ -42,6 +46,20 @@ function ScannerContent() {
       if (!res.ok) throw new Error(`Analysis failed (${res.status})`);
       const data = await res.json();
       setResult(data);
+
+      // Save to per-user history
+      const user = localStorage.getItem('slop_current_user') || 'guest';
+      const historyKey = `slop_history_${user}`;
+      const existing = JSON.parse(localStorage.getItem(historyKey) || '[]');
+      const entry = {
+        id: `scan_${Math.random().toString(36).slice(2, 7)}`,
+        date: new Date().toISOString().split('T')[0],
+        snippet: text.trim().slice(0, 60) + '...',
+        track: track ? track : 'All Tracks',
+        score: Math.round(data.overallScore),
+        verdict: data.verdict,
+      };
+      localStorage.setItem(historyKey, JSON.stringify([entry, ...existing].slice(0, 50)));
     } catch (e) {
       console.error(e);
       setApiError(e instanceof Error ? e.message : 'Something went wrong while analyzing.');
@@ -56,6 +74,26 @@ function ScannerContent() {
 
   const handleUploadError = (msg: string) => {
     setUploadError(msg);
+  };
+
+  const handleFetchUrl = async () => {
+    if (!urlInput.trim()) return;
+    setUrlFetching(true);
+    setUrlError(null);
+    setText('');
+    setResult(null);
+    setScannedUrl(null);
+    try {
+      const res = await fetch('/api/fetch-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: urlInput.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) { setUrlError(data.error || 'Failed to fetch URL'); }
+      else { setText(data.text); setScannedUrl(urlInput.trim()); }
+    } catch { setUrlError('Network error. Check the URL and try again.'); }
+    setUrlFetching(false);
   };
 
   const selectedTrack = track ? TRACKS[track] : null;
@@ -108,45 +146,54 @@ function ScannerContent() {
             </div>
 
             {/* Tab Toggle */}
-            <div style={{
-              display: 'flex',
-              gap: '0.25rem',
-              borderBottom: '1px solid var(--border-subtle)',
-              marginBottom: '1rem',
-            }}>
-              <button
-                style={tabStyle(inputMode === 'paste')}
-                onClick={() => setInputMode('paste')}
-              >
-                ✏️ Paste Text
-              </button>
-              <button
-                style={tabStyle(inputMode === 'upload')}
-                onClick={() => setInputMode('upload')}
-              >
-                📁 Upload File
-              </button>
+            <div style={{ display: 'flex', gap: '0.25rem', borderBottom: '1px solid var(--border-subtle)', marginBottom: '1rem' }}>
+              <button style={tabStyle(inputMode === 'paste')} onClick={() => setInputMode('paste')}>✏️ Paste Text</button>
+              <button style={tabStyle(inputMode === 'upload')} onClick={() => setInputMode('upload')}>📁 Upload File</button>
+              <button style={tabStyle(inputMode === 'url')} onClick={() => setInputMode('url')}>🌐 Scan URL</button>
             </div>
 
             {/* Upload Mode */}
             {inputMode === 'upload' && (
               <div style={{ marginBottom: '1rem' }}>
-                <FileUpload
-                  onTextExtracted={handleTextExtracted}
-                  onError={handleUploadError}
-                />
+                <FileUpload onTextExtracted={handleTextExtracted} onError={handleUploadError} />
                 {uploadError && (
-                  <div style={{
-                    marginTop: '0.75rem',
-                    padding: '0.625rem 1rem',
-                    borderRadius: '8px',
-                    background: 'rgba(255, 170, 0, 0.08)',
-                    border: '1px solid rgba(255, 170, 0, 0.2)',
-                    color: 'var(--color-warning)',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.8rem',
-                  }}>
+                  <div style={{ marginTop: '0.75rem', padding: '0.625rem 1rem', borderRadius: '8px', background: 'rgba(255, 170, 0, 0.08)', border: '1px solid rgba(255, 170, 0, 0.2)', color: 'var(--color-warning)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
                     ⚠️ {uploadError}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* URL Mode */}
+            {inputMode === 'url' && (
+              <div style={{ marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <input
+                    type="url"
+                    className="text-input"
+                    style={{ minHeight: 'auto', padding: '0.65rem 0.75rem', flex: 1, fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}
+                    placeholder="https://github.com/owner/repo/pull/123  or  any blog/article URL..."
+                    value={urlInput}
+                    onChange={e => { setUrlInput(e.target.value); setUrlError(null); }}
+                    onKeyDown={e => e.key === 'Enter' && handleFetchUrl()}
+                  />
+                  <button
+                    className={`scan-btn ${urlFetching ? 'scanning' : ''}`}
+                    onClick={handleFetchUrl}
+                    disabled={urlFetching || !urlInput.trim()}
+                    style={{ whiteSpace: 'nowrap', padding: '0.5rem 1rem', fontSize: '0.8rem' }}
+                  >
+                    {urlFetching ? 'Fetching...' : '🌐 Fetch'}
+                  </button>
+                </div>
+                {urlError && (
+                  <div style={{ padding: '0.6rem 0.75rem', background: 'rgba(248,81,73,0.1)', border: '1px solid rgba(248,81,73,0.3)', borderRadius: '6px', fontSize: '0.8rem', color: 'var(--color-danger)', fontFamily: 'var(--font-mono)' }}>
+                    ⚠ {urlError}
+                  </div>
+                )}
+                {scannedUrl && (
+                  <div style={{ fontSize: '0.72rem', color: 'var(--color-success)', fontFamily: 'var(--font-mono)', marginTop: '0.4rem' }}>
+                    ✅ Fetched: <a href={scannedUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>{scannedUrl}</a>
                   </div>
                 )}
               </div>

@@ -32,6 +32,7 @@ export default function AuthWrapper({ children }: { children: ReactNode }) {
         const savedPass = localStorage.getItem('slop_demo_pass');
         if (savedUser === userId && savedPass === password) {
           localStorage.setItem('slop_auth', '1');
+          localStorage.setItem('slop_current_user', userId);
           setIsAuthenticated(true);
         } else {
           setError('Invalid User ID or password. Please try again.');
@@ -41,6 +42,7 @@ export default function AuthWrapper({ children }: { children: ReactNode }) {
         localStorage.setItem('slop_demo_user', userId);
         localStorage.setItem('slop_demo_pass', password);
         localStorage.setItem('slop_auth', '1');
+        localStorage.setItem('slop_current_user', userId);
         setIsAuthenticated(true);
       }
       setLoading(false);
